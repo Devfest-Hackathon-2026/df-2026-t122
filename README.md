@@ -1,4 +1,4 @@
-# 📱 スマホ首ストッパー（Resolve Tech Neck）
+# 📱 neck-app
 
 **🌐 公開URL (Firebase Hosting):** https://resolve-teck-neck.web.app/
 
