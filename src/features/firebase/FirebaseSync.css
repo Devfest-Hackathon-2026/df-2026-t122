@@ -1,0 +1,52 @@
+/* 🔥 Firebase認証・データ保存機能専用スタイル */
+
+.firebase-sync-panel {
+  position: absolute;
+  top: 64px;
+  left: 16px;
+  z-index: 140;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.firebase-auth-btn,
+.firebase-save-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #2e303a;
+  background: rgba(22, 23, 29, 0.9);
+  backdrop-filter: blur(8px);
+  color: #e5e7eb;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.firebase-auth-btn:hover,
+.firebase-save-btn:hover:not(:disabled) {
+  border-color: #6b7280;
+  color: #fff;
+}
+
+.firebase-save-btn {
+  border-color: rgba(251, 191, 36, 0.45);
+  color: #fde68a;
+}
+
+.firebase-save-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.firebase-status-msg {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(22, 23, 29, 0.92);
+  border: 1px solid #2e303a;
+  color: #f3f4f6;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}

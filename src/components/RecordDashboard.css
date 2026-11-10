@@ -1,0 +1,845 @@
+/* 📊 記録画面（RecordDashboard）専用スタイルシート（完全独立） */
+
+/* 画面下部バーに配置する「📊 記録」ボタン */
+.rd-floating-open-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(192, 132, 252, 0.45);
+  background: linear-gradient(
+    135deg,
+    rgba(147, 51, 234, 0.9),
+    rgba(79, 70, 229, 0.9)
+  );
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(147, 51, 234, 0.35);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.rd-floating-open-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(147, 51, 234, 0.55);
+}
+
+.rd-floating-open-btn:active {
+  transform: scale(0.97);
+}
+
+/* 開いたときの全画面オーバーレイ */
+.rd-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 28px 20px 48px;
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(168, 85, 247, 0.14),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(56, 189, 248, 0.12),
+      transparent 40%
+    ),
+    #0f1016;
+  color: #f3f4f6;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  overflow-y: auto;
+}
+
+.rd-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ================= ヘッダー ================= */
+.rd-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rd-header-left {
+  text-align: left;
+}
+
+.rd-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #c084fc;
+  background: rgba(192, 132, 252, 0.14);
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.rd-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.rd-subtitle {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.rd-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rd-scope-tabs {
+  display: inline-flex;
+  background: #181a24;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid #2b2e3f;
+}
+
+.rd-scope-tab {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rd-scope-tab:hover {
+  color: #f3f4f6;
+}
+
+.rd-scope-tab.active {
+  background: linear-gradient(135deg, #9333ea, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.35);
+}
+
+.rd-close-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: rgba(31, 41, 55, 0.8);
+  color: #e5e7eb;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rd-close-btn:hover {
+  background: #374151;
+}
+
+/* ================= サマリー2カラム ================= */
+.rd-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.rd-card {
+  background: rgba(24, 26, 36, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rd-card-primary {
+  border-top: 3px solid #a855f7;
+}
+
+.rd-card-secondary {
+  border-top: 3px solid #38bdf8;
+}
+
+.rd-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.rd-card-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.rd-card-icon-wrap.posture {
+  background: rgba(168, 85, 247, 0.18);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.rd-card-icon-wrap.blink {
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.rd-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.rd-card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #d1d5db;
+  line-height: 1.35;
+}
+
+.rd-trend-pill,
+.rd-status-pill {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.rd-trend-pill.positive,
+.rd-status-pill.good {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.rd-status-pill.warn {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.rd-status-pill.bad {
+  background: rgba(239, 68, 68, 0.16);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.rd-metric-main {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.rd-metric-number {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.rd-metric-number.secondary {
+  font-size: 36px;
+  color: #bae6fd;
+}
+
+.rd-metric-unit {
+  font-size: 15px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-right: 8px;
+}
+
+.rd-blink-metrics-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rd-metric-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rd-sub-label {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.rd-metric-divider {
+  width: 1px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.rd-goal-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rd-goal-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.rd-goal-header strong {
+  color: #f3f4f6;
+}
+
+.rd-progress-track {
+  width: 100%;
+  height: 8px;
+  background: #12131c;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.rd-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rd-progress-fill.posture {
+  background: linear-gradient(90deg, #9333ea, #c084fc);
+}
+
+.rd-progress-fill.blink {
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+}
+
+.rd-card-footnote {
+  margin: 0;
+  font-size: 11.5px;
+  color: #9ca3af;
+  line-height: 1.45;
+}
+
+/* ================= 週間推移グラフカード ================= */
+.rd-weekly-card {
+  gap: 20px;
+}
+
+.rd-weekly-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.rd-weekly-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.rd-weekly-desc {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.rd-weekly-desc strong {
+  color: #e9d5ff;
+}
+
+.rd-selected-day-box {
+  background: rgba(17, 19, 28, 0.9);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rd-selected-day-date {
+  font-size: 11px;
+  font-weight: 700;
+  color: #c084fc;
+}
+
+.rd-selected-day-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: #d1d5db;
+}
+
+.rd-selected-day-stats strong {
+  color: #ffffff;
+}
+
+/* チャート描画領域（左：時間Y軸 ＋ 右：プロット領域） */
+.rd-chart-area {
+  position: relative;
+  height: 250px;
+  padding: 16px 16px 12px 12px;
+  background: rgba(15, 16, 23, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+/* 左端の縦軸（分単位メモリ） */
+.rd-y-axis {
+  position: relative;
+  width: 62px;
+  flex-shrink: 0;
+  /* 上部数値ラベル(26px)と下部曜日ラベル(44px)の分を空けてバートラックと高さを完全一致させる */
+  margin-top: 26px;
+  margin-bottom: 44px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rd-y-tick {
+  position: absolute;
+  right: 8px;
+  transform: translateY(50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.rd-y-tick.target {
+  color: #34d399;
+  font-weight: 800;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  padding: 2px 5px;
+  border-radius: 4px;
+  right: 6px;
+}
+
+/* 右側プロット領域 */
+.rd-plot-column {
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+
+/* グリッド線＆SVG折れ線の背景レイヤー（バートラックの上下位置と完全一致） */
+.rd-plot-backdrop {
+  position: absolute;
+  top: 26px;
+  bottom: 44px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rd-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rd-grid-line.target {
+  border-top: 1.5px dashed rgba(52, 211, 153, 0.7);
+  z-index: 2;
+}
+
+.rd-trend-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.rd-bars-grid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  height: 100%;
+}
+
+.rd-bar-column {
+  height: 100%;
+  background: transparent;
+  border: none;
+  padding: 0 2px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.rd-bar-column:hover,
+.rd-bar-column.selected {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.rd-bar-value {
+  height: 22px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #d1d5db;
+  flex-shrink: 0;
+}
+
+.rd-bar-column.selected .rd-bar-value {
+  color: #ffffff;
+}
+
+.rd-bar-track {
+  width: 100%;
+  max-width: 34px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px 8px 4px 4px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.rd-bar-fill {
+  width: 100%;
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, #818cf8, #4f46e5);
+  transition:
+    height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.2s;
+}
+
+.rd-bar-column.selected .rd-bar-fill,
+.rd-bar-column.today .rd-bar-fill {
+  background: linear-gradient(180deg, #e879f9, #9333ea);
+  box-shadow: 0 0 14px rgba(192, 132, 252, 0.5);
+}
+
+.rd-bar-day {
+  margin-top: 6px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.rd-today-dot {
+  font-size: 9px;
+  background: #9333ea;
+  color: #fff;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.rd-bar-date {
+  height: 18px;
+  font-size: 10px;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+/* 下部：日別プログレスバー比較リスト */
+.rd-horizontal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.rd-h-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 165px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(17, 19, 28, 0.65);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.rd-h-row:hover,
+.rd-h-row.selected {
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.rd-h-date {
+  font-size: 12px;
+  color: #d1d5db;
+}
+
+.rd-h-bar-wrap {
+  height: 8px;
+  background: #12131c;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rd-h-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1, #c084fc);
+  transition: width 0.4s ease;
+}
+
+.rd-h-metrics {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.rd-h-time {
+  font-weight: 700;
+  color: #f3f4f6;
+}
+
+.rd-h-blink {
+  color: #93c5fd;
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .rd-floating-open-btn {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .rd-wrapper {
+    padding: 16px 12px 36px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .rd-container {
+    gap: 16px;
+  }
+
+  .rd-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .rd-title {
+    font-size: 20px;
+  }
+
+  .rd-subtitle {
+    font-size: 12px;
+  }
+
+  .rd-header-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .rd-scope-tabs {
+    flex: 1;
+    display: flex;
+  }
+
+  .rd-scope-tab {
+    flex: 1;
+    padding: 7px 8px;
+    font-size: 11.5px;
+    text-align: center;
+  }
+
+  .rd-close-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .rd-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .rd-card {
+    padding: 16px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+
+  .rd-card-icon-wrap {
+    width: 38px;
+    height: 38px;
+    font-size: 19px;
+  }
+
+  .rd-metric-number {
+    font-size: 32px;
+  }
+
+  .rd-metric-number.secondary {
+    font-size: 26px;
+  }
+
+  .rd-metric-unit {
+    font-size: 13px;
+    margin-right: 4px;
+  }
+
+  .rd-blink-metrics-row {
+    gap: 12px;
+  }
+
+  .rd-metric-divider {
+    height: 36px;
+  }
+
+  .rd-weekly-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .rd-weekly-title {
+    font-size: 15.5px;
+  }
+
+  .rd-weekly-desc {
+    font-size: 12px;
+  }
+
+  .rd-chart-area {
+    height: 220px;
+    padding: 12px 8px 8px 4px;
+    gap: 6px;
+  }
+
+  .rd-y-axis {
+    width: 46px;
+    margin-top: 24px;
+    margin-bottom: 42px;
+  }
+
+  .rd-y-tick {
+    font-size: 9.5px;
+    right: 4px;
+  }
+
+  .rd-y-tick.target {
+    padding: 1px 3px;
+    right: 3px;
+    font-size: 9px;
+  }
+
+  .rd-plot-backdrop {
+    top: 24px;
+    bottom: 42px;
+  }
+
+  .rd-bars-grid {
+    gap: 4px;
+  }
+
+  .rd-bar-value {
+    height: 20px;
+    font-size: 9.5px;
+  }
+
+  .rd-bar-track {
+    max-width: 24px;
+  }
+
+  .rd-bar-day {
+    font-size: 11px;
+    gap: 2px;
+  }
+
+  .rd-today-dot {
+    font-size: 8px;
+    padding: 1px 3px;
+  }
+
+  .rd-bar-date {
+    font-size: 9px;
+  }
+
+  .rd-h-row {
+    grid-template-columns: 85px 1fr;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .rd-h-metrics {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+  }
+}

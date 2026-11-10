@@ -1,0 +1,310 @@
+/* ⚙️ 設定画面モーダル専用スタイルシート */
+
+.settings-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 16, 0.82);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease;
+}
+
+.settings-modal-backdrop.open {
+  z-index: 350;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 閉じているときも裏でカメラ(video要素)のフレーム処理が止まらないようDOMを維持して不可視化 */
+.settings-modal-backdrop.closed {
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.settings-modal-card {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  background: #161822;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #f3f4f6;
+}
+
+.settings-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 24px;
+  background: #1c1f2b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.settings-header-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.settings-header-icon {
+  font-size: 24px;
+}
+
+.settings-modal-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.settings-modal-subtitle {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.settings-close-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background: #262938;
+  color: #e5e7eb;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.settings-close-btn:hover {
+  background: #374151;
+  color: #ffffff;
+}
+
+.settings-modal-body {
+  padding: 20px 24px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-section-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.settings-section-desc {
+  margin: 0;
+  font-size: 12.5px;
+  color: #9ca3af;
+  line-height: 1.45;
+}
+
+/* 1. アカウント領域 */
+.settings-account-box {
+  background: rgba(15, 16, 23, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 2. 判定センサー選択トグルカード（2カラム） */
+.settings-toggle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.settings-sensor-toggle {
+  text-align: left;
+  padding: 16px;
+  border-radius: 14px;
+  border: 2px solid #2b2e3d;
+  background: rgba(18, 20, 28, 0.75);
+  color: #d1d5db;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.settings-sensor-toggle:hover {
+  border-color: #4b5563;
+}
+
+.settings-sensor-toggle.active {
+  border-color: #a855f7;
+  background: rgba(168, 85, 247, 0.12);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.2);
+}
+
+.sensor-toggle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sensor-toggle-icon {
+  font-size: 24px;
+}
+
+.sensor-toggle-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.sensor-toggle-badge.on {
+  background: #10b981;
+  color: #052e16;
+}
+
+.sensor-toggle-badge.off {
+  background: #374151;
+  color: #9ca3af;
+}
+
+.sensor-toggle-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sensor-toggle-note {
+  font-size: 11.5px;
+  color: #9ca3af;
+  line-height: 1.4;
+}
+
+.settings-warning-note {
+  margin: 4px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 3. カメラ・傾き状況パネル（設定画面内に並べて表示し、ホーム画面下部からは消す） */
+.settings-detectors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.settings-detectors-grid .pose-detector-panel,
+.settings-detectors-grid .tilt-detector-panel {
+  position: static !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  margin: 0;
+  background: rgba(15, 16, 23, 0.8);
+}
+
+/* 📱 スマートフォン向けレスポンシブ調整 */
+@media (max-width: 640px) {
+  .settings-modal-backdrop {
+    padding: 10px;
+  }
+
+  .settings-modal-card {
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: 16px;
+  }
+
+  .settings-modal-header {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+
+  .settings-header-icon {
+    font-size: 20px;
+  }
+
+  .settings-modal-title {
+    font-size: 17px;
+  }
+
+  .settings-modal-subtitle {
+    font-size: 11px;
+  }
+
+  .settings-close-btn {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .settings-modal-body {
+    padding: 14px 16px 24px;
+    gap: 18px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .settings-section-title {
+    font-size: 14px;
+  }
+
+  .settings-section-desc {
+    font-size: 11.5px;
+  }
+
+  .settings-account-box {
+    padding: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .settings-toggle-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .settings-sensor-toggle {
+    padding: 13px 14px;
+    border-radius: 12px;
+    gap: 6px;
+  }
+
+  .sensor-toggle-icon {
+    font-size: 20px;
+  }
+
+  .sensor-toggle-name {
+    font-size: 13.5px;
+  }
+
+  .settings-detectors-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

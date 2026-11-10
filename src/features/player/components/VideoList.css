@@ -1,0 +1,216 @@
+/* 📋 動画リスト & タブ切り替えコンポーネント用スタイル */
+
+.video-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto; /* 固定高さを解除し、コンテンツに応じて自然に伸長 */
+  box-sizing: border-box;
+  background-color: #12131a;
+  color: #f3f4f6;
+  overflow: visible; /* 独立スクロールを撤廃 */
+}
+
+/* タブバー領域（スクロール時もタブ選択しやすいよう上部にsticky固定） */
+.video-list-header {
+  padding: 10px 16px;
+  background: #161722;
+  border-bottom: 1px solid #232530;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+/* タブバー */
+.video-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+  padding-bottom: 2px;
+}
+
+.video-tabs::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.video-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1px solid #282a38;
+  background: #1a1b26;
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.video-tab-btn:hover {
+  background: #232534;
+  color: #e5e7eb;
+}
+
+.video-tab-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.video-tab-count {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+
+/* リストコンテンツ領域（overflow-y: auto を削除し親コンテナと一体化） */
+.video-list-scroll-area {
+  padding: 12px 16px 80px; /* 下部フローティングパネルとの被りを防ぎつつ不自然な余白を抑制 */
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* 動画グリッド（スマホは1列、タブレット・PCは2〜3列） */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 480px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
+/* 読み込み中スピナー */
+.video-list-state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  text-align: center;
+  color: #9ca3af;
+  gap: 12px;
+}
+
+.video-list-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* エラー状態 */
+.video-list-error-box {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 24px 16px;
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #fca5a5;
+  text-align: center;
+}
+
+.video-list-error-icon {
+  font-size: 28px;
+}
+
+.video-list-error-message {
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+  color: #f87171;
+}
+
+.video-list-retry-btn {
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.video-list-retry-btn:hover {
+  background: #dc2626;
+}
+
+.video-list-retry-btn:active {
+  transform: scale(0.97);
+}
+
+/* 0件・空状態 */
+.video-list-empty-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  color: #6b7280;
+  gap: 8px;
+  text-align: center;
+}
+
+.video-list-empty-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.video-list-empty-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.video-list-empty-desc {
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* スマートフォン向けの微調整 */
+@media (max-width: 480px) {
+  .video-list-scroll-area {
+    padding: 10px 12px 72px;
+  }
+}

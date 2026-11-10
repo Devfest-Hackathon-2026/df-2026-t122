@@ -1,0 +1,39 @@
+/* ⚠️ 警告バナー機能専用スタイル */
+
+.toast-banner {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4d4f;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 8px 24px rgba(255, 77, 79, 0.45);
+  transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 200;
+  width: calc(100% - 24px);
+  max-width: 480px;
+  box-sizing: border-box;
+  text-align: center;
+  pointer-events: none;
+}
+
+.toast-banner.show {
+  top: 64px;
+}
+
+@media (max-width: 480px) {
+  .toast-banner {
+    padding: 11px 14px;
+    font-size: 13px;
+    border-radius: 9px;
+  }
+
+  .toast-banner.show {
+    top: 56px;
+  }
+}
